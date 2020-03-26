@@ -1,0 +1,25 @@
+{
+  "name": "mix-page",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jason-xiewenqiang/mix-page.git"
+  },
+  "keywords": [],
+  "author": "hito",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jason-xiewenqiang/mix-page/issues"
+  },
+  "homepage": "https://github.com/jason-xiewenqiang/mix-page#readme",
+  "devDependencies": {
+    "vue": "^2.6.11",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}
