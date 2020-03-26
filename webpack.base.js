@@ -1,9 +1,10 @@
 const glob = require('glob');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const chunksConfig = require('./chunk.config')
+const isProd = process.env.NODE_ENV === 'production';
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const setMPA = () => {
   const entry = {};
@@ -15,6 +16,7 @@ const setMPA = () => {
       const match = entryFile.match(/src\/pages\/(.*)\/index\.js/);
       const pageName = match && match[1];
       entry[pageName] = entryFile;
+      console.log('chunksConfig[pageName]', chunksConfig[pageName])
       htmlWebpackPlugins.push(
         new HtmlWebpackPlugin({
           inlineSource: '.css$',
@@ -116,7 +118,7 @@ const config = {
       {
         test: /\.css$/,
         use: [
-          'vue-style-loader',
+            isProd ? MiniCssExtractPlugin.loader : 'vue-style-loader',
           'css-loader',
           'postcss-loader'
         ]
@@ -124,7 +126,7 @@ const config = {
       {
         test: /\.less$/,
         use: [
-          'vue-style-loader',
+            isProd ? MiniCssExtractPlugin.loader : 'vue-style-loader',
           'css-loader',
           'less-loader',
           'postcss-loader'
@@ -158,8 +160,5 @@ if (isSingle) {
 } else {
     config.plugins.push(...htmlWebpackPlugins)
 }
-
-console.log('entry', config.entry)
-console.log('htmlWebpackPlugins', htmlWebpackPlugins)
-
+console.log(htmlWebpackPlugins)
 module.exports = config

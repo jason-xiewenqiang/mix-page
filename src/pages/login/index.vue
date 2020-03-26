@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login">
       login
       <Checkbox :checked.sync="single">Checkbox</Checkbox>
   </div>
@@ -18,7 +18,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-    div {
+    .login {
         color: red;
     }
 </style>

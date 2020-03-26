@@ -5,10 +5,8 @@
 </template>
 
 <script>
-import Checkbox from 'iview/src/components/checkbox';
 export default {
     name: 'app',
-    components: {Checkbox},
     data () {
         return {
             single: false
