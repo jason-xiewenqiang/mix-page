@@ -4,9 +4,11 @@
 
 <script>
 import $ from 'jquery'
+import test from '@/utils/test';
 export default {
     name: 'home',
     mounted () {
+        test(4);
         $('body').css('background-color', 'blue')
     }
 }

@@ -1,16 +1,16 @@
 
 const merge = require('webpack-merge');
 const base = require('./webpack.base');
+const webpack = require('webpack')
 module.exports = merge(base, {
     mode: 'development',
     devServer: {
         hot: true,
         port: 8080,
-        // open: true,
         host: 'localhost',
         compress: true,
         useLocalIp: false,
-        contentBase: './dist',
+        contentBase: './',
         clientLogLevel: 'error',
         disableHostCheck: true,
         historyApiFallback: true,
@@ -18,10 +18,13 @@ module.exports = merge(base, {
         proxy: {}
     },
     devtool:'source-map',
-    watch:true,
+    watch: true,
     watchOptions: {
         ignored: /node_modules/,
         aggregateTimeout: 300,
         poll: 300
-    }
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ]
 })

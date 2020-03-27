@@ -2,8 +2,8 @@ const glob = require('glob');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const chunksConfig = require('./chunk.config')
 const isProd = process.env.NODE_ENV === 'production';
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const setMPA = () => {
   const entry = {};
@@ -15,16 +15,15 @@ const setMPA = () => {
       const match = entryFile.match(/src\/pages\/(.*)\/index\.js/);
       const pageName = match && match[1];
       entry[pageName] = entryFile;
-      const chunks = chunksConfig[pageName];
-      console.log('chunksConfig[pageName]', chunks)
       htmlWebpackPlugins.push(
         new HtmlWebpackPlugin({
           inlineSource: '.css$',
           template: path.join(__dirname, `src/pages/${pageName}/index.html`),
           filename: `${pageName}.html`,
-          chunks: chunks,
+          chunks: pageName,
           title: pageName,
           inject: true,
+          favicon: './public/favicon.ico',
           minify: {
             html5: true,
             collapseWhitespace: true,
@@ -47,8 +46,9 @@ var  {entry: entry, htmlWebpackPlugins: htmlWebpackPlugins } = setMPA()
 var singleHtmlWebpackPlugin = new HtmlWebpackPlugin({
     inlineSource: '.css$',
     template: `./src/app/index.html`,
-    filename: `app.html`,
-    chunks: chunksConfig['app'],
+    filename: `index.html`,
+    favicon: './public/favicon.ico',
+    chunks: 'main',
     title: 'app-dome',
     inject: true,
     minify: {
@@ -82,7 +82,7 @@ const config = {
         use: [{
             loader: 'thread-loader',
             options: {
-              workers: 2
+              workers: 4
             }
           },
           {
@@ -152,7 +152,10 @@ const config = {
       }
     ],
   },
-  plugins: [new VueLoaderPlugin()]
+  plugins: [
+    new VueLoaderPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin()
+  ]
 }
 
 if (isSingle) {
