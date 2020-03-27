@@ -32,32 +32,34 @@ const config = merge(base, {
             chunks: 'all',
             minSize: 20000, // 20k
             minChunks: 1,
-            maxAsyncRequests: 10,
-            maxInitialRequests: 2,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
             automaticNameDelimiter: '-',
             cacheGroups: {
                 commons: {
                     name: 'vendor',
                     test: /[\\/]node_modules[\\/]/,
-                    priority: 5,
+                    priority: -5,
                     chunks: 'initial'
                 },
                 iview: {
                     name: 'iview',
                     test: /[\\/]node_modules[\\/]iview[\\/]/,
-                    priority: 7,
-                    chunks: 'all'
+                    priority: -10,
+                    chunks: 'all',
+                    enforce: true
                 },
                 vue: {
                     name: 'vue',
                     test: /[\\/]node_modules[\\/]vue[\\/]/,
-                    priority: 10,
-                    chunks: 'all'
+                    priority: -20,
+                    chunks: 'all',
+                    enforce: true
                 },
                 axios: {
                     name: 'axios',
                     test: /[\\/]node_modules[\\/]axios[\\/]/,
-                    priority: 15,
+                    priority: -20,
                     chunks: 'async'
                 }
             }

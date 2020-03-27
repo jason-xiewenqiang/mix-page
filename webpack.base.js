@@ -5,7 +5,6 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const chunksConfig = require('./chunk.config')
 const isProd = process.env.NODE_ENV === 'production';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 const setMPA = () => {
   const entry = {};
   const htmlWebpackPlugins = [];
@@ -16,13 +15,14 @@ const setMPA = () => {
       const match = entryFile.match(/src\/pages\/(.*)\/index\.js/);
       const pageName = match && match[1];
       entry[pageName] = entryFile;
-      console.log('chunksConfig[pageName]', chunksConfig[pageName])
+      const chunks = chunksConfig[pageName];
+      console.log('chunksConfig[pageName]', chunks)
       htmlWebpackPlugins.push(
         new HtmlWebpackPlugin({
           inlineSource: '.css$',
           template: path.join(__dirname, `src/pages/${pageName}/index.html`),
           filename: `${pageName}.html`,
-          chunks: chunksConfig[pageName].push(pageName),
+          chunks: chunks,
           title: pageName,
           inject: true,
           minify: {
