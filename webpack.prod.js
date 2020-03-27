@@ -40,7 +40,7 @@ const config = merge(base, {
                     name: 'vendor',
                     test: /[\\/]node_modules[\\/]/,
                     priority: -5,
-                    chunks: 'initial'
+                    chunks: 'all'
                 },
                 iview: {
                     name: 'iview',
@@ -56,10 +56,16 @@ const config = merge(base, {
                     chunks: 'all',
                     enforce: true
                 },
+                jquery: {
+                    name: 'jquery',
+                    test: /[\\/]node_modules[\\/]jquery[\\/]/,
+                    priority: -22,
+                    chunks: 'async'
+                },
                 axios: {
                     name: 'axios',
                     test: /[\\/]node_modules[\\/]axios[\\/]/,
-                    priority: -20,
+                    priority: -25,
                     chunks: 'async'
                 }
             }

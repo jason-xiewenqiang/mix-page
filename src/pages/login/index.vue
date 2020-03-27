@@ -7,12 +7,16 @@
 
 <script>
 import Checkbox from 'iview/src/components/checkbox';
+import $ from 'jquery'
 export default {
     name: 'login',
     data () {
         return {
             single: false
         }
+    },
+    mounted () {
+        $('body').css('background-color', 'blue')
     }
 }
 </script>

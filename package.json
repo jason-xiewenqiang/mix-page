@@ -41,6 +41,7 @@
     "hard-source-webpack-plugin": "^0.13.1",
     "html-webpack-plugin": "^4.0.2",
     "iview": "^3.5.4",
+    "jquery": "^3.4.1",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
     "mini-css-extract-plugin": "^0.8.0",
@@ -58,7 +59,8 @@
     "webpack-bundle-analyzer": "^3.6.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "ztree": "^3.5.24"
   },
   "browserslist": [
     "defaults",

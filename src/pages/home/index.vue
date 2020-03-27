@@ -3,8 +3,12 @@
 </template>
 
 <script>
+import $ from 'jquery'
 export default {
-    name: 'home'
+    name: 'home',
+    mounted () {
+        $('body').css('background-color', 'blue')
+    }
 }
 </script>
 
