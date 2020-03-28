@@ -5,3 +5,6 @@
 
 # node-modules
 /node_modules/
+
+# error
+*.log
