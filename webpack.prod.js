@@ -30,49 +30,66 @@ const config = merge(base, {
     new HardSourceWebpackPlugin(),
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
-        {
-          from: 'dll',
-          to: 'dll',
-          toType: 'dir'
-        }
+      {
+        from: 'dll',
+        to: 'dll',
+        toType: 'dir'
+      }
     ])
   ],
   optimization: {
-      splitChunks: {
-          name: true,
-          chunks: 'async',
-          minSize: 20000, // 20k
-          minChunks: 1,
-          maxAsyncRequests: 5,
-          maxInitialRequests: 3,
-          automaticNameDelimiter: '-',
-          cacheGroups: {
-              vendors: {
-                  name: 'vendors',
-                  test: /[\\/]node_modules[\\/]/,
-                  priority: 5,
-                  chunks: 'initial'
-              },
-              iview: {
-                  name: 'iview',
-                  test: /[\\/]node_modules[\\/]iview[\\/]/,
-                  priority: 10,
-                  chunks: 'async'
-              },
-              axios: {
-                  name: 'axios',
-                  test: /[\\/]node_modules[\\/]axios[\\/]/,
-                  priority: 15,
-                  chunks: 'async'
-                },
-          }
-      },
-      minimizer: [
-          new TerserPlugin({
-              parallel: true,
-              cache: true
-          })
-      ]
+    splitChunks: {
+      name: true,
+      chunks: 'all',
+      minSize: 200000, // 20k
+      minChunks: 1,
+      maxAsyncRequests: 100,
+      maxInitialRequests: 100,
+      automaticNameDelimiter: '-',
+      cacheGroups: {
+        vendors: {
+          name: 'vendors',
+          test: /[\\/]node_modules[\\/]/,
+          priority: -30,
+          chunks: 'all',
+          reuseExistingChunk: true,
+        },
+        vue: {
+          name: 'vue',
+          test: /[\\/]node_modules[\\/]vue[\\/]/,
+          priority: -10,
+          chunks: 'all',
+          reuseExistingChunk: true,
+        },
+        jquery: {
+          name: 'jquery',
+          test: /[\\/]node_modules[\\/]jquery[\\/]/,
+          priority: -15,
+          chunks: 'all',
+          reuseExistingChunk: true,
+        },
+        iView: {
+          name: 'iView',
+          test: /[\\/]node_modules[\\/]iview[\\/]/,
+          priority: -5,
+          chunks: 'all',
+          reuseExistingChunk: true,
+        },
+        zTree: {
+          name: 'zTree',
+          test: /[\\/]node_modules[\\/]zTree[\\/]/i,
+          priority: -20,
+          chunks: 'all',
+          reuseExistingChunk: true,
+        },
+      }
+    },
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        cache: true
+      })
+    ]
   }
 })
 

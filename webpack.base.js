@@ -155,14 +155,14 @@ const config = {
   plugins: [
     new VueLoaderPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.DllReferencePlugin({
-      context: __dirname,
-      manifest: require('./dll/vue.manifest.json')
-    }),
-    new webpack.DllReferencePlugin({
-      context: __dirname,
-      manifest: require('./dll/jquery.manifest.json')
-    }),
+    // new webpack.DllReferencePlugin({
+    //   context: __dirname,
+    //   manifest: require('./dll/vue.manifest.json')
+    // }),
+    // new webpack.DllReferencePlugin({
+    //   context: __dirname,
+    //   manifest: require('./dll/jquery.manifest.json')
+    // }),
   ]
 }
 
