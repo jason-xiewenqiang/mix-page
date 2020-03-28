@@ -14,7 +14,7 @@ module.exports = merge(base, {
     host: 'localhost',
     compress: true,
     useLocalIp: false,
-    contentBase: './dist',
+    contentBase: './',
     clientLogLevel: 'error',
     disableHostCheck: true,
     historyApiFallback: true,

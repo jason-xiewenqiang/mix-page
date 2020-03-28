@@ -18,7 +18,7 @@ const setMPA = () => {
       htmlWebpackPlugins.push(
         new HtmlWebpackPlugin({
           inlineSource: '.css$',
-          template: path.join(__dirname, `src/pages/${pageName}/index.html`),
+          template: path.join(__dirname, `src/pages/${pageName}/index${isProd ? '.prod' : '.dev'}.html`),
           filename: `${pageName}.html`,
           chunks: ['vendors', pageName],
           title: pageName,
@@ -154,7 +154,15 @@ const config = {
   },
   plugins: [
     new VueLoaderPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin()
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('./dll/vue.manifest.json')
+    }),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('./dll/jquery.manifest.json')
+    }),
   ]
 }
 
