@@ -14,11 +14,13 @@
 import Checkbox from 'iview/src/components/checkbox';
 import TabPane from 'iview/src/components/tab-pane';
 import Tabs from 'iview/src/components/tabs';
+import Message from 'iview/src/components/message'
 import $ from 'jquery'
 import test from '../../utils/test';
+import Api from '@/api/index'
 export default {
-    name: 'login',
-    components: {Checkbox, TabPane, Tabs},
+    name: 'login2',
+    components: {Checkbox: Checkbox, TabPane: TabPane, Tabs: Tabs, Message: Message},
     data () {
         return {
             single: false
@@ -26,6 +28,8 @@ export default {
     },
     async mounted () {
         test(1);
+        const {code, data} = await Api.user.list();
+        console.log('axios', code, data);
         const res = await this.getUser();
         console.log(res)
         $('body').css('background-color', 'rgba(0,0,0,.25)')

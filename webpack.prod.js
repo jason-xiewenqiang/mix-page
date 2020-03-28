@@ -38,11 +38,11 @@ const config = merge(base, {
         automaticNameDelimiter: '-',
         name: true,
         cacheGroups: {
-            // vendors: {
-            //     name: 'vendors',
-            //     test: /[\\/]node_modules[\\/]/,
-            //     priority: -10
-            // },
+            vendors: {
+                name: 'vendors',
+                test: /[\\/]node_modules[\\/]/,
+                priority: -10
+            },
             default: {
                     minChunks: 1,
                     priority: -20,

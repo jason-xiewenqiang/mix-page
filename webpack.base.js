@@ -20,7 +20,7 @@ const setMPA = () => {
           inlineSource: '.css$',
           template: path.join(__dirname, `src/pages/${pageName}/index.html`),
           filename: `${pageName}.html`,
-          chunks: pageName,
+          chunks: ['vendors', pageName],
           title: pageName,
           inject: true,
           favicon: './public/favicon.ico',

@@ -10,6 +10,7 @@ import Checkbox from 'iview/src/components/checkbox';
 import $ from 'jquery'
 import test from '@/utils/test';
 export default {
+    components: {Checkbox},
     name: 'login',
     data () {
         return {
