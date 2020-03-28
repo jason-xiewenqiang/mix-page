@@ -7,12 +7,14 @@
 
 + 多页 开发生产
 + cnpm install 安装依赖
++ cnpm run dll
 + cnpm run dev 开启多页模式 localhost:8080/xxx.html 访问
 + cnpm run build 进行生产打包
 + cnpm run analyzer 进行包分析 localhost:8888
 
 + 单页 开发生产
 + cnpm install 安装依赖
++ cnpm run dll
 + cnpm run dev:s 开启多页模式 localhost:8080/xxx.html 访问
 + cnpm run build:s  进行生产打包
 + cnpm run analyzer 进行包分析 localhost:8888
