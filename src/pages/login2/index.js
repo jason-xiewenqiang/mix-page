@@ -2,8 +2,8 @@ import 'normalize.css';
 import Vue from 'vue';
 import 'iview/dist/styles/iview.css';
 import App from './index.vue'
-import zTree from 'ztree'
-Vue.prototype.$zTree = zTree
+import 'ztree'
+import 'ztree/css/zTreeStyle/zTreeStyle.css';
 
 new Vue({
     el: '#app',

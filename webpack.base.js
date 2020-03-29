@@ -5,6 +5,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const isProd = process.env.NODE_ENV === 'production';
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const chunks = require('./chunks.config')
 const setMPA = () => {
   const entry = {};
   const htmlWebpackPlugins = [];
@@ -18,9 +19,9 @@ const setMPA = () => {
       htmlWebpackPlugins.push(
         new HtmlWebpackPlugin({
           inlineSource: '.css$',
-          template: path.join(__dirname, `src/pages/${pageName}/index${isProd ? '.prod' : '.dev'}.html`),
+          template: path.join(__dirname, `src/pages/${pageName}/index.html`),
           filename: `${pageName}.html`,
-          chunks: ['vendors', pageName],
+          chunks: chunks[pageName],
           title: pageName,
           inject: true,
           favicon: './public/favicon.ico',
@@ -42,23 +43,26 @@ const setMPA = () => {
   }
 }
 const isSingle = process.env.single === 'true'
-var  {entry: entry, htmlWebpackPlugins: htmlWebpackPlugins } = setMPA()
+var {
+  entry: entry,
+  htmlWebpackPlugins: htmlWebpackPlugins
+} = setMPA()
 var singleHtmlWebpackPlugin = new HtmlWebpackPlugin({
-    inlineSource: '.css$',
-    template: `./src/app/index.html`,
-    filename: `index.html`,
-    favicon: './public/favicon.ico',
-    chunks: 'main',
-    title: 'app-dome',
-    inject: true,
-    minify: {
-      html5: true,
-      collapseWhitespace: true,
-      preserveLineBreaks: false,
-      minifyCSS: true,
-      minifyJS: true,
-      removeComments: false
-    }
+  inlineSource: '.css$',
+  template: `./src/app/index.html`,
+  filename: `index.html`,
+  favicon: './public/favicon.ico',
+  chunks: 'main',
+  title: 'app-dome',
+  inject: true,
+  minify: {
+    html5: true,
+    collapseWhitespace: true,
+    preserveLineBreaks: false,
+    minifyCSS: true,
+    minifyJS: true,
+    removeComments: false
+  }
 })
 const config = {
   entry: isSingle ? path.join(__dirname, 'src/app/index.js') : entry,
@@ -118,7 +122,7 @@ const config = {
       {
         test: /\.css$/,
         use: [
-            isProd ? MiniCssExtractPlugin.loader : 'vue-style-loader',
+          isProd ? MiniCssExtractPlugin.loader : 'vue-style-loader',
           'css-loader',
           'postcss-loader'
         ]
@@ -126,20 +130,35 @@ const config = {
       {
         test: /\.less$/,
         use: [
-            isProd ? MiniCssExtractPlugin.loader : 'vue-style-loader',
+          isProd ? MiniCssExtractPlugin.loader : 'vue-style-loader',
           'css-loader',
           'less-loader',
           'postcss-loader'
         ]
       },
+      // {
+      //   test: /\.(png|svg|jpg|gif)$/,
+      //   use: [{
+      //     loader: 'url-loader', //是指定使用的loader和loader的配置参数
+      //     options: {
+      //       limit: 500, //是把小于500B的文件打成Base64的格式，写入JS
+      //       name: 'images/[name]_[hash:6].[ext]'
+      //     }
+      //   }]
+      // },
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            outputPath: './images'
-          }
-        }]
+        test:/\.(png|jpg|jpeg|gif|svg)$/,
+          use:[
+              {
+                  loader:"url-loader",
+                  options:{
+                      limit:50000,   //表示低于50000字节（50K）的图片会以 base64编码
+                      outputPath:"./images",
+                      name: '[name].[hash:5].[ext]',
+                      pulbicPath:"./dist/images"
+                  }
+              }
+          ]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
@@ -155,21 +174,16 @@ const config = {
   plugins: [
     new VueLoaderPlugin(),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    // new webpack.DllReferencePlugin({
-    //   context: __dirname,
-    //   manifest: require('./dll/vue.manifest.json')
-    // }),
-    // new webpack.DllReferencePlugin({
-    //   context: __dirname,
-    //   manifest: require('./dll/jquery.manifest.json')
-    // }),
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+    })
   ]
 }
 
 if (isSingle) {
-    config.plugins.push(singleHtmlWebpackPlugin)
+  config.plugins.push(singleHtmlWebpackPlugin)
 } else {
-    config.plugins.push(...htmlWebpackPlugins)
+  config.plugins.push(...htmlWebpackPlugins)
 }
-console.log(htmlWebpackPlugins)
 module.exports = config

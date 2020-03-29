@@ -28,14 +28,7 @@ const config = merge(base, {
       cssProcessor: require('cssnano')
     }),
     new HardSourceWebpackPlugin(),
-    new CleanWebpackPlugin(['dist']),
-    new CopyWebpackPlugin([
-      {
-        from: 'dll',
-        to: 'dll',
-        toType: 'dir'
-      }
-    ])
+    new CleanWebpackPlugin(['dist'])
   ],
   optimization: {
     splitChunks: {
@@ -57,21 +50,21 @@ const config = merge(base, {
         vue: {
           name: 'vue',
           test: /[\\/]node_modules[\\/]vue[\\/]/,
-          priority: -10,
+          priority: -5,
           chunks: 'all',
           reuseExistingChunk: true,
         },
-        jquery: {
-          name: 'jquery',
+        jQuery: {
+          name: 'jQuery',
           test: /[\\/]node_modules[\\/]jquery[\\/]/,
           priority: -15,
           chunks: 'all',
           reuseExistingChunk: true,
         },
-        iView: {
-          name: 'iView',
+        iview: {
+          name: 'iview',
           test: /[\\/]node_modules[\\/]iview[\\/]/,
-          priority: -5,
+          priority: -10,
           chunks: 'all',
           reuseExistingChunk: true,
         },
