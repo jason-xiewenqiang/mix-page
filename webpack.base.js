@@ -155,8 +155,9 @@ const config = {
                       limit:50000,   //表示低于50000字节（50K）的图片会以 base64编码
                       outputPath:"./images",
                       name: '[name].[hash:5].[ext]',
-                      pulbicPath:"./dist/images"
-                  }
+                      pulbicPath:"./dist/images",
+                      esModule: false,
+                  },
               }
           ]
       },

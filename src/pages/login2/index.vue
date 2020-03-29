@@ -7,7 +7,7 @@
         <TabPane label="标签二" name="name2">标签二的内容111</TabPane>
         <TabPane label="标签三" name="name3">标签三的内容</TabPane>
     </Tabs>
-    <img :src="src" />
+    <img src="./../../assets/images/1.jpg" />
     <div id="log"></div>
     <div id='tree' class="ztree"></div>
 
