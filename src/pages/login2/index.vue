@@ -7,6 +7,9 @@
         <TabPane label="标签二" name="name2">标签二的内容111</TabPane>
         <TabPane label="标签三" name="name3">标签三的内容</TabPane>
     </Tabs>
+    <a href="login1.html" target="_self">login1</a>
+    <button @click="test">test</button>
+    <div v-html="div"></div>
     <img src="./../../assets/images/1.jpg" />
     <div id="log"></div>
     <div id='tree' class="ztree"></div>
@@ -28,7 +31,8 @@ export default {
     data () {
         return {
             single: false,
-            src: Image
+            src: Image,
+            div: ''
         }
     },
     async mounted () {
@@ -40,6 +44,9 @@ export default {
         this.buildTree();
     },
     methods: {
+        test() {
+            this.div = import('./component.vue')
+        },
         getUser() {
             return new Promise((s,j) => {
                 setTimeout(() => {

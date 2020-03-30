@@ -43,7 +43,7 @@ const config = merge(base, {
         vendors: {
           name: 'vendors',
           test: /[\\/]node_modules[\\/]/,
-          priority: -30,
+          priority: -80,
           chunks: 'all',
           reuseExistingChunk: true,
         },
@@ -74,6 +74,13 @@ const config = merge(base, {
           priority: -20,
           chunks: 'all',
           reuseExistingChunk: true,
+        },
+        axios: {
+            name: 'axios',
+            test: /[\\/]node_modules[\\/]axios[\\/]/,
+            priority: -25,
+            chunks: 'all',
+            reuseExistingChunk: true,
         },
       }
     },

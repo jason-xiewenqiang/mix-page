@@ -17,6 +17,7 @@ import TabPane from 'iview/src/components/tab-pane';
 import Tabs from 'iview/src/components/tabs';
 import $ from 'jquery';
 import test from '@/utils/test';
+import Api from '@/api/index';
 export default {
     name: 'login',
     components: {Checkbox, TabPane, Tabs},
