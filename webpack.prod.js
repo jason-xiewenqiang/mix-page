@@ -84,6 +84,9 @@ const config = merge(base, {
         },
       }
     },
+    runtimeChunk:{
+      name: 'manifest'
+    },
     minimizer: [
       new TerserPlugin({
         parallel: true,
