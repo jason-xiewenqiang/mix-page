@@ -166,7 +166,8 @@ const config = {
         use: [{
           loader: 'file-loader',
           options: {
-            outputPath: './font'
+            outputPath: 'font',
+            publicPath: './font'
           }
         }]
       }
