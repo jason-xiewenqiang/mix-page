@@ -76,7 +76,7 @@
     "> 1%"
   ],
   "dependencies": {
-    "underscore": "^1.9.2",
+    "underscore": "^1.12.1",
     "url-loader": "^4.0.0"
   }
 }
